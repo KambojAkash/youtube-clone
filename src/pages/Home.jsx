@@ -7,11 +7,15 @@ import useGetVideoList from "../CustomHooks/useGetVideoList";
 import { addVideos } from "../store/slices/DataSlice";
 import { Outlet } from "react-router-dom";
 import SearchResultCard from "../components/SearchResultCard";
+import { offMenuOverlay } from "../store/slices/GeneralConfigSlice";
 const Home = () => {
-  
+  const dispatch=useDispatch()
   const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
+  const OnMenuOverlay = useSelector((store) => store.generalConfig.sideBarOverlay);
   
-  
+  useEffect(()=>{
+dispatch(offMenuOverlay())
+  },[])
     
     
      

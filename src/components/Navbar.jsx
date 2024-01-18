@@ -79,16 +79,17 @@ const Navbar = () => {
         console.log(transcript);
         SpeechRecognition.stopListening();
         setIsMicOn(false);
-        navigate("search/"+"coder kamboj")
+        // navigate("search/"+"coder kamboj")
         
         // console.log("search q",searchQuery)
         
         clearInterval(Interval);
       }, 4000);
-    } else {
-      SpeechRecognition.stopListening();
-      setSearchQuery("");
     }
+    // } else {
+    //   SpeechRecognition.stopListening();
+    //   setSearchQuery("");
+    // }
   };
 
   const startListening = () => {
@@ -175,7 +176,7 @@ const Navbar = () => {
           </span>
         </div>
         <div>
-          <IoPersonCircle className="w-10 h-10 mr-2" />
+          <IoPersonCircle className="w-10 h-10 mr-5" />
         </div>
       </div>
       {showSuggestions && (

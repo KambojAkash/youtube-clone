@@ -5,13 +5,31 @@ const DataSlice=createSlice({
     initialState:{
         videos:[],
         searchedVideos:[],
+        channelVideos:[],
+        suggestedVideos:[]
     },
     reducers:{
         addVideos(state,action){
-                state.videos.push(action.payload)
+            
+                state.videos=[...action.payload]
         },
         addSearchedVideos(state,action){
+            
             state.searchedVideos.push(action.payload)
+    },
+        addChannelVideos(state,action){
+            
+            state.channelVideos=[...action.payload];
+    },
+    addSuggestedVideos(state,action){
+        state.suggestedVideos=[...action.payload];
+    },
+    clearSuggestedVideos(state,action){
+        
+           state.suggestedVideos.length=0;
+    },
+        clearChannelVideos(state){
+           state.channelVideos.length=0;
     },
 
         clearVideos(state){
@@ -22,5 +40,5 @@ const DataSlice=createSlice({
         }
     }
 })
-export const{addVideos,clearVideos,addSearchedVideos,clearSearchedVideos}=DataSlice.actions;
+export const{addVideos,clearVideos,addSearchedVideos,clearSearchedVideos,addChannelVideos,clearChannelVideos,addSuggestedVideos,clearSuggestedVideos}=DataSlice.actions;
 export default DataSlice.reducer;
