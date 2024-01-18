@@ -12,7 +12,7 @@ import useViewFormater from '../CustomHooks/useViewFormater';
 import { IoMdShareAlt } from "react-icons/io";
 import CommentsSection from '../components/CommentSection';
 import { addSuggestedVideos, addVideos } from '../store/slices/DataSlice';
-import { YT_KEY, YT_URL, options} from '../assets/Constants';
+import { YT_KEY, YT_URL, comments, options} from '../assets/Constants';
 let data=[
   {
    user:"akash" ,
@@ -49,9 +49,7 @@ const VideoPage = () => {
   const videos=useSelector((store) => store?.data?.videos);
   const suggestedVideos=useSelector((store) => store?.data?.suggestedVideos);
   const[mainVideoDetail,setMainVideoDetail]=useState([])
- const[pageToken,setPageToken]=useState("");
- const[loading,setLoading]=useState(false);
- const[hasMore,setHasMore]=useState(false);
+ 
   
   console.log(videos,"ooo")
 
@@ -76,58 +74,16 @@ const VideoPage = () => {
     dispatch(addVideos(jsonData.items));
     
 }
-const handleScroll = () => {
-  // Check if the user has scrolled to the bottom of the page
-  if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-    // If there is more data and not currently loading, increment the page
-    if (hasMore && !loading) {
-      setPage(pageToken);
-    }
-  }
-};
-useEffect(() => {
-  // Attach the event listener to the scroll event
-  window.addEventListener('scroll', handleScroll);
 
-  // Clean up the event listener when the component is unmounted
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, [handleScroll]);
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      setLoading(true);
 
-      // Simulating fetching data from an API
-      const response = await fetch(`https://youtube-v31.p.rapidapi.com/search?relatedToVideoId=${v}&part=id%2Csnippet%2Cstatistics&type=video&maxResults=50&pageToken=${pageToken}'`,options);
-      const newData = await response.json();
 
-      // Update state with new data
-      // setData((prevData) => [...prevData, ...newData]);
-      console.log("ifi",newData)
-
-      // If there is no more data, set hasMore to false
-      if (newData.length === 0) {
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch data when the component mounts and whenever the page state changes
-  fetchData();
-}, [pageToken]);
   async function getSuggestedVideos(){
     let data = await fetch(suggestedVideosURL,options);
     let jsonData = await data.json();
     console.log("suggest",jsonData);
     // setData(jsonData.items)
-    setPageToken(jsonData.nextPageToken)
+  
     console.log("token",pageToken)
     dispatch(addSuggestedVideos(jsonData.items));
     
@@ -170,19 +126,13 @@ useEffect(() => {
          </div>
          <div className='w-full mt-5 '>
           <h3 className='text-2xl font-bold'>Comments : {useViewFormater(mainVideoDetail[0]?.statistics?.commentCount)}</h3>
-           
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
-           <CommentsSection user={"akash"} text={"lorem dklsf dksfdls"}/>
+           {
+            comments?.map((com,i)=>{
+              return <CommentsSection key={i} user={com.user} text={com.text}/>
+             
+            })
+           }
+          
            </div>
         </div>
         <div className='w-[90%] lg:w-[35%]'>

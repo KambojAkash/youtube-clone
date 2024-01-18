@@ -3,7 +3,7 @@ function useViewFormater(viewCount) {
   
     if (isNaN(num)) {
       
-      return 'Invalid view count';
+      return '';
     }
   
     if (num < 1000) {

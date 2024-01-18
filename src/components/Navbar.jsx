@@ -27,7 +27,6 @@ const Navbar = () => {
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
-    onEnd,
   } = useSpeechRecognition();
   const isHamburger = useSelector((store) => store);
 
@@ -64,46 +63,47 @@ const Navbar = () => {
   const handleHamburger = () => {
     dispatch(toggleHamBurger());
   };
-
+  const startListening = () => {
+    SpeechRecognition.startListening({ continuous: true });
+    // inputRef.current.focus();
+  };
   const handleMicButton = () => {
-    // setSearchQuery("")
-    let temp = !isMicOn;
-    setIsMicOn(temp);
 
-    console.log(transcript);
-    if (temp) {
-      startListening();
-      audioRef.current.play();
-      let Interval = setInterval(() => {
-        // searchFunForAll(searchQuery);
-        console.log(transcript);
-        SpeechRecognition.stopListening();
-        setIsMicOn(false);
-        // navigate("search/"+"coder kamboj")
+    // setSearchQuery("")
+    // let temp = !isMicOn;
+    // setIsMicOn(temp);
+    startListening();
+
+    // console.log(listening);
+    // if (temp) {
+    //   audioRef.current.play();
+    //   let Interval = setInterval(() => {
+    //     // searchFunForAll(searchQuery);
+    //     console.log(transcript);
+    //     SpeechRecognition.stopListening();
+    //     setIsMicOn(false);
+    //     // navigate("search/"+"coder kamboj")
         
-        // console.log("search q",searchQuery)
+    //     // console.log("search q",searchQuery)
         
-        clearInterval(Interval);
-      }, 4000);
-    }
+    //     clearInterval(Interval);
+    //   }, 4000);
+    // }
     // } else {
     //   SpeechRecognition.stopListening();
     //   setSearchQuery("");
     // }
   };
 
-  const startListening = () => {
-    SpeechRecognition.startListening({ continuous: true });
-    inputRef.current.focus();
-  };
+  
 
-  async function searchVideos(text) {
-    let res = await fetch(YT_SEARCH_URL + text);
-    let jsondata = res.json();
-    navigate("/search/"+text)
-    // addSearchedVideos(jsondata.items)
-    return jsondata;
-  }
+  // async function searchVideos(text) {
+  //   let res = await fetch(YT_SEARCH_URL + text);
+  //   let jsondata = res.json();
+  //   navigate("/search/"+text)
+  //   // addSearchedVideos(jsondata.items)
+  //   return jsondata;
+  // }
   // function searchFunForAll(text){
   //   dispatch(clearSearchedVideos())
   //   searchVideos(text)
@@ -118,6 +118,8 @@ const Navbar = () => {
 
   const handleSearch = () => {
     // searchFunForAll(searchQuery);
+
+    if(searchQuery=="") return
     navigate("/search/"+searchQuery)
   };
 
@@ -179,7 +181,7 @@ const Navbar = () => {
           <IoPersonCircle className="w-10 h-10 mr-5" />
         </div>
       </div>
-      {showSuggestions && (
+      {(showSuggestions && suggestions.length )?
         <ul className="bg-white text-black w-[40%] p-5 z-50 absolute top-14 left-[32%]  rounded-lg">
           {suggestions && suggestions.map((sug, index) => (
             <li
@@ -190,8 +192,8 @@ const Navbar = () => {
               {sug}
             </li>
           ))}
-        </ul>
-      )}
+        </ul>:""
+      }
     </>
   );
 };

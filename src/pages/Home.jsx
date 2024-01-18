@@ -8,6 +8,7 @@ import { addVideos } from "../store/slices/DataSlice";
 import { Outlet } from "react-router-dom";
 import SearchResultCard from "../components/SearchResultCard";
 import { offMenuOverlay } from "../store/slices/GeneralConfigSlice";
+import SpeechReco from "../components/SpeechReco";
 const Home = () => {
   const dispatch=useDispatch()
   const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
@@ -29,7 +30,7 @@ dispatch(offMenuOverlay())
       <Navbar />
       <div className="w-screen min-h-screen bg-[#0f0f0f] grid grid-cols-11">
         {isSideBarOpen && <Siderbar />}
-        
+       
 
         <Outlet />
        

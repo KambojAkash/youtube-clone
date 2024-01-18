@@ -34,10 +34,10 @@ let data=[
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <p className="text-sm font-semibold">{user}</p>
-          {/* You can add more details like time since comment, reply button, etc. here */}
+          
         </div>
-        <p className="text-sm text-gray-700">{text}</p>
-        {/* You can add additional elements here, like like/dislike buttons, reply button, etc. */}
+        <p className="text-sm text-gray-400">{text}</p>
+        
       </div>
     </div>
   );

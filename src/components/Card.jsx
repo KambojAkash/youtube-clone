@@ -19,7 +19,7 @@ const Card = ({data}) => {
         <img className="w-full rounded-lg object-cover" src={thumbnails?.medium?.url} alt="" /></Link>
        <div className='flex justify-between items-start '>
         <ul className='pt-2 w-[85%]'>
-            <li className='text-[16px] font-semibold'>{title.slice(0,80)}...</li>
+            <li className='text-[16px] font-semibold'>{title?.slice(0,80)}...</li>
             <li className='text-[14px]  mt-1 text-gray-400'>{channelTitle} . {useViewFormater(viewCount)}</li>
 
         </ul>

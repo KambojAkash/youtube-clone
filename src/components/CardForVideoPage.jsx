@@ -27,40 +27,72 @@ const CardForVideoPage = ({data}) => {
         }
       }
   return (
-    <>
-    {
-        data?.id?.kind=="youtube#channel" ?<div className="w-[1000px] p-5 h-60 items-center border-t border-b border-gray-300 flex justify-between yp-4 mb-4  shadow-md">
+  //   <>
+  //   {
+  //       data?.id?.kind=="youtube#channel" ?<div className="w-[1000px] p-5 h-60 items-center border-t border-b border-gray-300 flex justify-between yp-4 mb-4  shadow-md">
+  //       <img
+  //         src={thumbnails?.medium?.url ? thumbnails?.medium?.url:"https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"} // Replace with your channel image source
+  //         alt="Channel Thumbnail"
+  //         className="w-24 h-24 object-cover border border-gray-200 rounded-full mr-4"
+  //       />
+  //       <div className='p-10'>
+  //         <h2 className="text-lg font-semibold mb-2">{title}</h2>
+  //         <p className="text-gray-500 text-sm">
+  //           {description}
+  //         </p>
+        
+  //       </div>
+  //       <button className='py-2 p-5 text-black bg-white font-medium rounded-full hover:bg-[#ddd]' >Subscribe</button>
+  //     </div>: 
+  //     <Link to={"/watch/"+id.videoId}>
+  //     <div className="w-full h-32 flex relative text-white p-2  rounded-lg">
+  //     <img
+  //       src={thumbnails?.medium?.url?thumbnails?.medium?.url:"https://user-images.githubusercontent.com/10515204/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg"} // Replace with your image source
+  //       alt="Video Thumbnail"
+  //       className={`w-36 lg:w-auto object-cover rounded-md mr-4`}
+  //     />
+  //     <div className='flex flex-wrap flex-col '>
+  //       <h2 className="text-[14px] font-semibold mb-2">{title.slice(0,60)}...</h2>
+  //       <span className='text-[13px] text-gray-200 block'>{channelTitle}</span>
+  //       {/* <span className='text-[13px] text-gray-200 inline'>{useViewFormater(viewCount)} . {calculateTimeDifference(publishedAt)}</span> */}
+    
+  //     </div>
+  //   </div>
+  //   </Link>
+  //   }
+  //  </>
+  <>
+    {data?.id?.kind === 'youtube#channel' ? (
+      <div className="w-full p-5 md:w-[600px] lg:w-[800px] xl:w-[1000px] h-auto items-center border-t border-b border-gray-300 flex justify-between yp-4 mb-4 shadow-md">
         <img
-          src={thumbnails?.medium?.url ? thumbnails?.medium?.url:"https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"} // Replace with your channel image source
+          src={thumbnails?.medium?.url ? thumbnails?.medium?.url : "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"}
           alt="Channel Thumbnail"
           className="w-24 h-24 object-cover border border-gray-200 rounded-full mr-4"
         />
-        <div className='p-10'>
+        <div className='p-4 md:p-6'>
           <h2 className="text-lg font-semibold mb-2">{title}</h2>
           <p className="text-gray-500 text-sm">
             {description}
           </p>
-        
         </div>
-        <button className='py-2 p-5 text-black bg-white font-medium rounded-full hover:bg-[#ddd]' >Subscribe</button>
-      </div>: 
-      <Link to={"/watch/"+id.videoId}>
-      <div className="w-full h-32 flex relative text-white p-2  rounded-lg">
-      <img
-        src={thumbnails?.medium?.url?thumbnails?.medium?.url:"https://user-images.githubusercontent.com/10515204/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg"} // Replace with your image source
-        alt="Video Thumbnail"
-        className={`w-[50%]  object-cover rounded-md mr-4`}
-      />
-      <div className='flex flex-wrap flex-col '>
-        <h2 className="text-[14px] font-semibold mb-2">{title.slice(0,60)}...</h2>
-        <span className='text-[13px] text-gray-200 block'>{channelTitle}</span>
-        {/* <span className='text-[13px] text-gray-200 inline'>{useViewFormater(viewCount)} . {calculateTimeDifference(publishedAt)}</span> */}
-    
+        <button className='py-2 px-5 text-black bg-white font-medium rounded-full hover:bg-[#ddd]'>Subscribe</button>
       </div>
-    </div>
-    </Link>
-    }
-   </>
+    ) : (
+      <Link to={"/watch/" + id.videoId}>
+        <div className="w-full h-auto md:h-32 flex relative text-white p-2 md:p-4 lg:p-1 rounded-lg mt-1">
+          <img
+            src={thumbnails?.medium?.url ? thumbnails?.medium?.url : "https://user-images.githubusercontent.com/10515204/56117400-9a911800-5f85-11e9-878b-3f998609a6c8.jpg"}
+            alt="Video Thumbnail"
+            className={`w-36 lg:w-auto object-cover rounded-md mr-4`}
+          />
+          <div className='flex flex-wrap flex-col'>
+            <h2 className="text-[14px] md:text-lg lg:text-[15px] font-semibold mb-2">{title.slice(0, 60)}...</h2>
+            <span className='text-[13px] md:text-[14px] lg:text-[16px] text-gray-200 block'>{channelTitle}</span>
+          </div>
+        </div>
+      </Link>
+    )}
+  </>
   );
 };
 
