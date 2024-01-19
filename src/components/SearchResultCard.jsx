@@ -2,9 +2,11 @@ import React from 'react';
 import { IoPersonCircle } from "react-icons/io5";
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import useViewFormater from '../CustomHooks/useViewFormater';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 const SearchResultCard = ({data}) => {
     const navigate=useNavigate()
-    console.log(data)
+    // console.log(data)
     const {snippet,id}=data;
     const {title,thumbnails,channelTitle,description,channelId}=snippet;
     const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
@@ -29,22 +31,37 @@ const SearchResultCard = ({data}) => {
         </div>
         <button className='py-2 p-5 text-black bg-white font-medium rounded-full hover:bg-[#ddd] hidden lg:visible' >Subscribe</button>
       </div>:
-       <Link to={"../watch/"+id.videoId}>
-       <div className="w-auto h-40 overflow-hidden lg:h-60 flex  relative text-white p-4 mb-4 rounded-lg">
-      <img
-        src={thumbnails.medium.url} // Replace with your image source
-        alt="Video Thumbnail"
-        className={`w-48 h-28 lg:w-auto lg:h-full object-cover rounded-md mr-4`}
-      />
-      <div className='flex flex-wrap lg:w-3/6'>
-        <h2 className="visible lg:hidden text-[10px] font-semibold mb-2">{title.slice(0,30)}...</h2>
-        <h2 className="hidden lg:block  lg:text-lg lg:font-semibold lg:mb-2">{title}</h2>
-        <p className="text-gray-400 text-sm">
-          {description.slice(0,50)}...
-        </p>
-      </div>
-    </div>
-    </Link>
+    //    <Link to={"../watch/"+id.videoId}>
+    //    <div className="w-auto h-40 overflow-hidden lg:h-60 flex  relative text-white p-4 mb-4 rounded-lg">
+    //   <img
+    //     src={thumbnails.medium.url} // Replace with your image source
+    //     alt="Video Thumbnail"
+    //     className={`w-48 h-28 lg:w-auto lg:h-full object-cover rounded-md mr-4`}
+    //   />
+    //   <div className='flex flex-wrap lg:w-3/6'>
+    //     <h2 className="visible lg:hidden text-[10px] font-semibold mb-2">{title.slice(0,30)}...</h2>
+    //     <h2 className="hidden lg:block  lg:text-lg lg:font-semibold lg:mb-2">{title}</h2>
+    //     <p className="text-gray-400 text-sm">
+    //       {description.slice(0,50)}...
+    //     </p>
+    //   </div>
+    // </div>
+    // </Link>
+    <div className='block w-[90%] h-fit my-2  md:w-80 lg:w-full  relative lg:flex gap-5'>
+    <Link to={"../watch/"+id.videoId}>
+    <img className="w-full rounded-lg object-cover" src={thumbnails?.medium?.url} alt="" /></Link>
+   <div className='flex justify-between items-start '>
+    <ul className='pt-2 w-[85%]'>
+        <li className='text-[16px] font-semibold'>{title?.slice(0,80)}...</li>
+        
+        <li className='hidden lg:block text-[14px]  mt-1 text-gray-400'>{description.slice(0,100)}...</li>
+
+    </ul>
+
+<span className='pt-3'><BsThreeDotsVertical  className='text-xl'  /></span>
+</div>
+</div>
+
     }
    </>
   );

@@ -14,7 +14,7 @@ const SearchPage = () => {
     let {q} = useParams();
  
     const searchQuery = q
-    console.log(searchQuery)
+    // console.log(searchQuery)
     const isSideBarOpen=useSelector((store) => store.generalConfig.hamBurger);
     const searchVideos=useSelector((store) => store?.data?.searchedVideos);
     useEffect(()=>{
@@ -24,7 +24,7 @@ const SearchPage = () => {
         dispatch(clearSearchedVideos())
         getSearchVideos(searchQuery)
         .then((d) => {
-          console.log("--",d)
+          // console.log("--",d)
           
           dispatch(addSearchedVideos(d.items));
         })
@@ -47,7 +47,7 @@ const SearchPage = () => {
        
       }
 
-    console.log("searched data",searchVideos[0])
+    // console.log("searched data",searchVideos[0])
     if(loading){
       return <SearchCardShimmer />
     }

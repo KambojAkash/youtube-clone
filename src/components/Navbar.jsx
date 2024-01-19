@@ -12,6 +12,7 @@ import micsound from "../assets/sounds/micsound.wav";
 import useGetVideoList from "../CustomHooks/useGetVideoList";
 import { AUTO_SUGG_API, YT_SEARCH_URL } from "../assets/Constants";
 import { addSearchedVideos, clearSearchedVideos } from "../store/slices/DataSlice";
+import { languageParts } from "../lang/lang";
 
 const Navbar = () => {
   const [isMicOn, setIsMicOn] = useState(false);
@@ -21,6 +22,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const language=useSelector((store) => store.generalConfig.lang);
   const navigate=useNavigate();
   const {
     transcript,
@@ -69,26 +71,26 @@ const Navbar = () => {
   };
   const handleMicButton = () => {
 
-    // setSearchQuery("")
-    // let temp = !isMicOn;
-    // setIsMicOn(temp);
+    setSearchQuery("")
+    let temp = !isMicOn;
+    setIsMicOn(temp);
     startListening();
 
     // console.log(listening);
-    // if (temp) {
-    //   audioRef.current.play();
-    //   let Interval = setInterval(() => {
-    //     // searchFunForAll(searchQuery);
-    //     console.log(transcript);
-    //     SpeechRecognition.stopListening();
-    //     setIsMicOn(false);
-    //     // navigate("search/"+"coder kamboj")
+    if (temp) {
+      audioRef.current.play();
+      let Interval = setInterval(() => {
+        // searchFunForAll(searchQuery);
+        console.log(transcript);
+        SpeechRecognition.stopListening();
+        navigate("search/"+inputRef.current.value)
+        setIsMicOn(false);
+        resetTranscript()
+        // console.log("search q",searchQuery)
         
-    //     // console.log("search q",searchQuery)
-        
-    //     clearInterval(Interval);
-    //   }, 4000);
-    // }
+        clearInterval(Interval);
+      }, 4000);
+    }
     // } else {
     //   SpeechRecognition.stopListening();
     //   setSearchQuery("");
@@ -159,7 +161,7 @@ const Navbar = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               type="text"
               value={searchQuery}
-              placeholder="Search Videos...."
+              placeholder={languageParts.searchVideos[language]}
               onFocus={() => setShowSuggestions(true)}
               onBlur={handleInputBlur}
               className="bg-transparent border h-full border-white w-60 lg:w-full border-r-transparent rounded-l-full py-2 px-3"
