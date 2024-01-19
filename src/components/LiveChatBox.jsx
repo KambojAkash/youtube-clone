@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { languageParts } from '../lang/lang';
 import { useSelector } from 'react-redux';
+import { CHAT_LIMIT } from '../assets/Constants';
+import { useRandomNameGenerator } from '../CustomHooks/useRandomNameGenerator';
+import { generateRandomChatMessage } from '../utils/generateRandomChatMessage';
 
 const LiveChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -8,17 +11,22 @@ const LiveChatBox = () => {
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
   const language=useSelector((store) => store.generalConfig.lang);
-  // Simulate dummy messages
+  
   useEffect(() => {
+    if (messages.length > CHAT_LIMIT) {
+        setMessages((prev) => prev.slice(-CHAT_LIMIT));
+      }
+    
+      
     const intervalId = setInterval(() => {
       const newMessage = {
-        username: 'User' + (messages.length + 1),
-        text: 'This is a new message!',
+        username: useRandomNameGenerator(),
+        text: generateRandomChatMessage(),
         timestamp: new Date().toLocaleTimeString(),
       };
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-    }, 2000); 
+    }, 500); 
 
    
     return () => clearInterval(intervalId);
@@ -38,7 +46,7 @@ const LiveChatBox = () => {
 
      
       const newMessage = {
-        username: 'User' + (messages.length + 1),
+        username: 'Akash' ,
         text: newMessageText,
         timestamp: new Date().toLocaleTimeString(),
       };

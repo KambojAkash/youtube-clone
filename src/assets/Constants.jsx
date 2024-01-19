@@ -14,6 +14,7 @@ export const options = {
 		'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
 	}
 };
+export let  CHAT_LIMIT=20;
 export const comments = [
 	{ user: 'AlexJohnson', text: 'Great video! Really enjoyed it.' },
 	{ user: 'EmilySmith', text: 'Awesome content, keep it up!' },
