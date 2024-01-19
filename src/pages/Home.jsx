@@ -8,7 +8,7 @@ import { addVideos } from "../store/slices/DataSlice";
 import { Outlet } from "react-router-dom";
 import SearchResultCard from "../components/SearchResultCard";
 import { offMenuOverlay } from "../store/slices/GeneralConfigSlice";
-import SpeechReco from "../components/SpeechReco";
+
 const Home = () => {
   const dispatch=useDispatch()
   const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);

@@ -11,7 +11,7 @@ const ChannelPage = () => {
     const dispatch=useDispatch()
     const [channelDetail,setChannelDetail]=useState([]);
     const channelVideos=useSelector((store)=>store?.data?.channelVideos)
-    console.log("{}",channelVideos)
+    
     const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
     useEffect(()=>{
       getChannelDetails();
@@ -23,17 +23,17 @@ const ChannelPage = () => {
         let data=await fetch(`https://youtube-v31.p.rapidapi.com/search?channelId=${c}&part=snippet%2Cid&order=date&maxResults=50`,options);
         let jsonData=await data.json();
         dispatch(addChannelVideos(jsonData.items))
-        console.log("channel videos ---------",jsonData)
+       
     }
     async function getChannelDetails(){
         let data=await fetch(`https://youtube-v31.p.rapidapi.com/channels?part=snippet%2Cstatistics&id=${c}`,options);
         let jsonData=await data.json();
         setChannelDetail(jsonData.items[0])
-        console.log("channel v",jsonData.items[0])
+       
     }
   return (
     <div className={`${isSideBarOpen ? 'overflow-auto col-span-7 lg:col-span-9' : 'overflow-visible col-span-full'} z-10 bg-[#0f0f0f] min-h-screen p-3 `}>
-      {/* Channel Header */}
+    
       <div className="mb-4">
         <div className="flex items-center">
           <img

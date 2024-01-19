@@ -17,9 +17,9 @@ function App() {
   <Routes>
     <Route path='/' element={<Home />} >
     <Route path='/' element={<VideoContainer />} />
-    <Route path='channel/:c' element={<ChannelPage />} />
-    <Route path='search/:q' element={<SearchPage />} />
-    <Route path='watch/:v' element={<VideoPage />} />
+    <Route path='/channel/:c' element={<ChannelPage />} />
+    <Route path='/search/:q' element={<SearchPage />} />
+    <Route path='/watch/:v' element={<VideoPage />} />
     {/* <Route path='/search/:q' element={<v />} /> */}
     </Route>
   </Routes>

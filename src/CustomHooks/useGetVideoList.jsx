@@ -17,7 +17,7 @@ const useGetVideoList = () => {
     }
 
     getVideos();
-  }, []); // Empty dependency array means this effect runs once after the initial render
+  }, []); 
 
   return videos;
 };

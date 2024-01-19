@@ -12,7 +12,7 @@ const VideoContainer = () => {
     const dispatch = useDispatch();
   const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
   const videosData = useSelector((store) => store?.data?.videos);
-  
+ 
   console.log(videosData,",.")
   const[data,setData]=useState([])
 //   const [carddata, setCardData] = useState([]);
@@ -25,6 +25,9 @@ useEffect(()=>{
    getVideos()
    
 },[])
+
+
+
 async function getVideos(){
   try{
     let data = await fetch(YT_URL+YT_KEY);
@@ -49,7 +52,7 @@ if(loading){
   return (
     <>
    
-    <div className={`${isSideBarOpen ? 'overflow-auto col-span-7 lg:col-span-9' : 'overflow-visible col-span-full'} z-10 bg-[#0f0f0f] min-h-screen p-3 flex justify-center items-center flex-wrap gap-5`}>
+    <div className={`${isSideBarOpen ? 'overflow-auto col-span-7 lg:col-span-9' : 'overflow-visible col-span-full'} z-10 bg-[#0f0f0f] min-h-screen p-3 flex justify-center items-center gap-3 flex-wrap lg:gap-5 `}>
       {videosData &&
         videosData?.map((item, i) => {
             // <p>{item.id}</p>

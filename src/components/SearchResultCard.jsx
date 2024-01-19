@@ -30,17 +30,17 @@ const SearchResultCard = ({data}) => {
         <button className='py-2 p-5 text-black bg-white font-medium rounded-full hover:bg-[#ddd] hidden lg:visible' >Subscribe</button>
       </div>:
        <Link to={"../watch/"+id.videoId}>
-       <div className="w-auto h-40 lg:h-60 flex relative text-white p-4 mb-4 rounded-lg">
+       <div className="w-auto h-40 overflow-hidden lg:h-60 flex  relative text-white p-4 mb-4 rounded-lg">
       <img
         src={thumbnails.medium.url} // Replace with your image source
         alt="Video Thumbnail"
-        className={`w-48 h-32 lg:w-auto lg:h-full object-cover rounded-md mr-4`}
+        className={`w-48 h-28 lg:w-auto lg:h-full object-cover rounded-md mr-4`}
       />
-      <div className='flex flex-wrap flex-col lg:w-3/6'>
-        <h2 className="visible lg:hidden text-[13px] font-semibold mb-2">{title.slice(0,30)}...</h2>
+      <div className='flex flex-wrap lg:w-3/6'>
+        <h2 className="visible lg:hidden text-[10px] font-semibold mb-2">{title.slice(0,30)}...</h2>
         <h2 className="hidden lg:block  lg:text-lg lg:font-semibold lg:mb-2">{title}</h2>
         <p className="text-gray-400 text-sm">
-          {description}
+          {description.slice(0,50)}...
         </p>
       </div>
     </div>
