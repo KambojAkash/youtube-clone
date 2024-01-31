@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Siderbar from "../components/Siderbar";
 import VideoContainer from "../components/VideoContainer";
@@ -7,19 +7,21 @@ import useGetVideoList from "../CustomHooks/useGetVideoList";
 import { addVideos } from "../store/slices/DataSlice";
 import { Outlet } from "react-router-dom";
 import SearchResultCard from "../components/SearchResultCard";
-import { offMenuOverlay } from "../store/slices/GeneralConfigSlice";
+import { offMenuOverlay, onMenuOverlay } from "../store/slices/GeneralConfigSlice";
 
 const Home = () => {
-  const dispatch=useDispatch()
+
+  const dispatch=useDispatch();
+ 
   const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
   const OnMenuOverlay = useSelector((store) => store.generalConfig.sideBarOverlay);
   
-  useEffect(()=>{
-dispatch(offMenuOverlay())
-  },[])
+//   useEffect(()=>{
+ 
+// dispatch(offMenuOverlay())
+//   },[])
     
-    
-     
+ 
      
 
  

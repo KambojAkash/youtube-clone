@@ -28,8 +28,8 @@ const Siderbar = () => {
     <>
     <div className={`col-span-4 lg:col-span-2 bg-[#0f0f0f] text-white px-2 ${(menuOverlay==true)?"absolute min-h-screen top-14 left-0":"relative"} `}>
         <ul className='list-none w-full flex flex-col justify-center items-center'>
-            <li onClick={()=>(navigate("/search/shorts video"))} className='w-full p-3 hover:bg-gray-600 transition-all duration-150 rounded-lg cursor-pointer flex gap-5 '><IoMdHome className='text-3xl text-white' /> <span>{languageParts.home[language]}</span></li>
-            <li onClick={()=>(navigate("/"))} className='w-full p-3 hover:bg-gray-600 transition-all duration-150 rounded-lg cursor-pointer flex gap-5 '><SiYoutubeshorts className='text-3xl text-white' /> <span>{languageParts.shorts[language]}</span></li>
+            <li onClick={()=>(navigate("/"))} className='w-full p-3 hover:bg-gray-600 transition-all duration-150 rounded-lg cursor-pointer flex gap-5 '><IoMdHome className='text-3xl text-white' /> <span>{languageParts.home[language]}</span></li>
+            <li onClick={()=>(navigate("/search/shorts video"))} className='w-full p-3 hover:bg-gray-600 transition-all duration-150 rounded-lg cursor-pointer flex gap-5 '><SiYoutubeshorts className='text-3xl text-white' /> <span>{languageParts.shorts[language]}</span></li>
             {/* <li className='w-full p-3 hover:bg-gray-600 transition-all duration-150 rounded-lg cursor-pointer flex gap-5 '><MdOutlineExplore className='text-3xl text-white'/> <span>Explore</span></li> */}
            
             <li  className='w-full p-3 rounded-lg  flex gap-5 '> <span>Explore</span></li>

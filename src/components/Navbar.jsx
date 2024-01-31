@@ -83,7 +83,7 @@ const Navbar = () => {
         // searchFunForAll(searchQuery);
         console.log(transcript);
         SpeechRecognition.stopListening();
-        navigate("search/"+inputRef.current.value)
+       inputRef.current.value && navigate("search/"+inputRef.current.value)
         setIsMicOn(false);
         resetTranscript()
         // console.log("search q",searchQuery)
@@ -122,7 +122,8 @@ const Navbar = () => {
     // searchFunForAll(searchQuery);
 
     if(searchQuery=="") return
-    navigate("/search/"+searchQuery)
+    navigate("/search/"+searchQuery);
+    setSearchQuery("")
   };
 
   function handleSuggestionClick(text) {

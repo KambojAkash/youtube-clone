@@ -19,6 +19,9 @@ const GeneralConfigSlice= createSlice({
         },
         closeMenu(state){
           state.hamBurger=false;
+        },
+        openMenu(state){
+          state.hamBurger=true;
         }
         ,
         setLang(state,action){
@@ -26,5 +29,5 @@ const GeneralConfigSlice= createSlice({
         }
     }
 })
-export const{toggleHamBurger,closeMenu,onMenuOverlay,offMenuOverlay,setLang}=GeneralConfigSlice.actions
+export const{toggleHamBurger,closeMenu,onMenuOverlay,offMenuOverlay,setLang,openMenu}=GeneralConfigSlice.actions
 export default GeneralConfigSlice.reducer;

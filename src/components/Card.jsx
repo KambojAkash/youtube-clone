@@ -14,7 +14,7 @@ const Card = ({data}) => {
       
   return (
     <>
-    <div className='w-[90%] h-fit my-2  md:w-80 lg:w-80 lg:h-72 relative'>
+    <div className='w-[95%] h-fit my-2  md:w-80 lg:w-80 lg:h-72 relative'>
         <Link to={"/watch/"+id}>
         <img className="w-full rounded-lg object-cover" src={thumbnails?.medium?.url} alt="" /></Link>
        <div className='flex justify-between items-start '>

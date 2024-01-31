@@ -4,15 +4,16 @@ import Card from './Card';
 import useGetVideoList from '../CustomHooks/useGetVideoList';
 import { addVideos, clearVideos } from '../store/slices/DataSlice';
 import { YT_KEY, YT_URL, options } from '../assets/Constants';
-import { offMenuOverlay } from '../store/slices/GeneralConfigSlice';
+import { closeMenu, offMenuOverlay, onMenuOverlay, openMenu } from '../store/slices/GeneralConfigSlice';
 import CardShimmer from './shimmers/CardShimmer';
 
 const VideoContainer = () => {
     const [loading,setLoading]=useState(true)
     const dispatch = useDispatch();
   const isSideBarOpen = useSelector((store) => store.generalConfig.hamBurger);
+  const OnMenuOverlay = useSelector((store) => store.generalConfig.sideBarOverlay);
   const videosData = useSelector((store) => store?.data?.videos);
- 
+  const [isSmallDevice, setIsSmallDevice] = useState(false);
   console.log(videosData,",.")
   const[data,setData]=useState([])
 //   const [carddata, setCardData] = useState([]);
@@ -20,12 +21,40 @@ const VideoContainer = () => {
 //   console.log(data)
 useEffect(()=>{
     dispatch(offMenuOverlay())
-   dispatch(clearVideos())
-
-   getVideos()
+  
    
 },[])
+useEffect(() => {
+  dispatch(clearVideos())
 
+  getVideos()
+
+  // Function to update the isSmallDevice state based on the screen width
+  const updateIsSmallDevice = () => {
+    const screenWidth = window.innerWidth;
+    setIsSmallDevice(screenWidth < 600);
+  };
+
+  // Initial check on component mount
+  updateIsSmallDevice();
+
+  
+  window.addEventListener('resize', updateIsSmallDevice);
+
+  
+  return () => {
+    window.removeEventListener('resize', updateIsSmallDevice);
+  };
+}, []);
+useEffect(()=>{
+ if(isSmallDevice){
+  
+  dispatch(closeMenu())
+ }else{
+  dispatch(openMenu())
+  
+ }
+},[isSmallDevice])
 
 
 async function getVideos(){
